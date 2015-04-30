@@ -26,9 +26,9 @@ public class Main {
 			Document d= Parser.parse(pflowXML);
 			Pnet net = new Pnet(d);
 			
-			System.out.println("Zvolen√° petriho sie≈• obsahuje " + net.countPlaces() + " miest(a) a " + net.countTransitions() + " prechod(y/ov)");
+			System.out.println("Zvolen· petriho sieù obsahuje " + net.countPlaces() + " miest(a) a " + net.countTransitions() + " prechod(y/ov)");
 			//net.getReachabilityTree();
-			System.out.println("Je ohraniƒçen√°? " + net.getBoundedness());
+			System.out.println("Je ohraniËen·? " + net.getBoundedness());
 			//net.printPlaces();
 			//net.printTransitions();
 			
@@ -51,28 +51,30 @@ public class Main {
 			boolean existNew = true;
 			int indexPredchadzajuceho = 0;
 			
-			while(existNew){
+			while(existNew){ // pokial existuju s oznacenim novy
 				indexPredchadzajuceho = nodes.size()-1;
 				
-				List<State> stavy = net.getAllPossibleStatesFrom(nodes.get(nodes.size()-1).getState());
+				List<State> stavy = net.getAllPossibleStatesFrom(nodes.get(indexPredchadzajuceho).getState());
 				if(stavy.isEmpty()){
-					nodes.get(nodes.size()-1).setMark("mrtvy");
+					nodes.get(indexPredchadzajuceho).setMark("mrtvy");
 				}
 				else{
 					
 					for (State state : stavy) {
-						Node newNode = new Node(nodes.size()+1, nodes.get(nodes.size()-1).getId(), 1);
+						Node newNode = new Node(nodes.size()+1, nodes.get(indexPredchadzajuceho).getId(), 1);
 						newNode.setState(state);
 						//prechod nodes aby sme nasli source node
+						/*
 						Node sourceNode = null;
 						for(Node node : nodes){
 							if(node.getId() == nodes.get(nodes.size()-1).getSourceId())
 								sourceNode = node;
 						}
+						*/
 						//porovnanie ci je terajsi rovnaky ako source
 						//TODO: omega
 						
-						if(nodes.get(nodes.size()-1).getVec().equals(sourceNode.getVec())){
+						if(newNode.getVec().equals(nodes.get(indexPredchadzajuceho).getVec())){
 							nodes.get(nodes.size()-1).setMark("stary");
 						}
 						else
@@ -83,10 +85,9 @@ public class Main {
 					}
 					
 				}
-				
 				int newCounter = 0;
 				for(Node node : nodes){
-					if(node.getMark().equals("novy"))
+					if(node.getMark() == "novy")
 						newCounter++;
 				}
 				if(newCounter == 0)
