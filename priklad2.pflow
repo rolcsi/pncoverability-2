@@ -13,7 +13,7 @@
             <x>-199</x>
             <y>-39</y>
             <label/>
-            <tokens>1</tokens>
+            <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
@@ -21,7 +21,7 @@
             <x>35</x>
             <y>-49</y>
             <label/>
-            <tokens>0</tokens>
+            <tokens>1</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
@@ -44,16 +44,28 @@
             <y>71</y>
             <label/>
         </transition>
+        <transition>
+            <id>15</id>
+            <x>-115</x>
+            <y>93</y>
+            <label/>
+        </transition>
         <arc>
             <type>regular</type>
-            <sourceId>8</sourceId>
-            <destinationId>9</destinationId>
+            <sourceId>15</sourceId>
+            <destinationId>8</destinationId>
+            <multiplicity>2</multiplicity>
+        </arc>
+        <arc>
+            <type>regular</type>
+            <sourceId>14</sourceId>
+            <destinationId>15</destinationId>
             <multiplicity>1</multiplicity>
         </arc>
         <arc>
             <type>regular</type>
-            <sourceId>9</sourceId>
-            <destinationId>10</destinationId>
+            <sourceId>12</sourceId>
+            <destinationId>14</destinationId>
             <multiplicity>1</multiplicity>
         </arc>
         <arc>
@@ -64,8 +76,14 @@
         </arc>
         <arc>
             <type>regular</type>
-            <sourceId>12</sourceId>
-            <destinationId>14</destinationId>
+            <sourceId>9</sourceId>
+            <destinationId>10</destinationId>
+            <multiplicity>1</multiplicity>
+        </arc>
+        <arc>
+            <type>regular</type>
+            <sourceId>8</sourceId>
+            <destinationId>9</destinationId>
             <multiplicity>1</multiplicity>
         </arc>
     </subnet>

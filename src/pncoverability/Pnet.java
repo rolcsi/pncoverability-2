@@ -204,8 +204,10 @@ public class Pnet {
 
 		for (Transition transition : transitions) {
 			State afterState = s.fireTransition(transition);
-			if (afterState != null)
-				afterTrans.add(afterState);			
+			if (afterState != null) {
+				afterState.setFiredTransition(transition);
+				afterTrans.add(afterState);
+			}
 		}
 		return afterTrans;
 	}

@@ -59,7 +59,7 @@ public class Node {
 			else
 				text += v.toString() + " ";
 		}
-		System.out.println(text + ")");
+		System.out.println(text + ") " + this.mark);
 	}
 	
 	public String getMark(){

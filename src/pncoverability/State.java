@@ -8,6 +8,7 @@ public class State {
 
 	private List<State> parents;
 	private Places places;
+	private Transition firedTransition;
 
 	public State() {
 		this.places = new Places();
@@ -104,5 +105,13 @@ public class State {
 			i++;
 		}
 		return pole;
+	}
+
+	public Transition getFiredTransition() {
+		return firedTransition;
+	}
+
+	public void setFiredTransition(Transition firedTransition) {
+		this.firedTransition = firedTransition;
 	}
 }

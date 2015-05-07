@@ -32,11 +32,11 @@ public class Main {
 			//net.printPlaces();
 			//net.printTransitions();
 			
-			State state1 = net.getState();
+			//State state1 = net.getState();
 			//state1.printPlaces();
-			State state2 = state1.fireTransition(net.getTransitionById(1));
+			//State state2 = state1.fireTransition(net.getTransitionById(1));
 			//state2.printPlaces();
-			state1 = state2.fireTransition(net.getTransitionById(3));
+			//state1 = state2.fireTransition(net.getTransitionById(3));
 			//state1.printPlaces();
 			List<Node> nodes = new LinkedList<Node>();
 			int incrementID = 0;
@@ -61,10 +61,11 @@ public class Main {
 				else{
 					
 					for (State state : stavy) {
-						Node newNode = new Node(nodes.size()+1, nodes.get(indexPredchadzajuceho).getId(), 1);
+						Node newNode = new Node(nodes.size(), nodes.get(indexPredchadzajuceho).getId(), state.getFiredTransition().getId());
 						newNode.setState(state);
+						newNode.setVec(state.getPlacesVec());
 						//prechod nodes aby sme nasli source node
-						/*
+						/* nepouûÌvaù
 						Node sourceNode = null;
 						for(Node node : nodes){
 							if(node.getId() == nodes.get(nodes.size()-1).getSourceId())
@@ -73,6 +74,19 @@ public class Main {
 						*/
 						//porovnanie ci je terajsi rovnaky ako source
 						//TODO: omega
+						int i = 0, j = 0;
+						int newVec[] = new int[newNode.getVec().length];
+						newVec = newNode.getVec().clone();
+						for (i = 0; i < newNode.getVec().length; i++) {	
+							if (newVec[i] > nodes.get(indexPredchadzajuceho).getVec()[i]) {
+								newVec[i] = -1;
+								j++;
+							}
+							else if (newVec[i] == nodes.get(indexPredchadzajuceho).getVec()[i])
+								j++;
+						}
+						if (j == newNode.getVec().length)
+							newNode.setVec(newVec);
 						
 						if(newNode.getVec().equals(nodes.get(indexPredchadzajuceho).getVec())){
 							nodes.get(nodes.size()-1).setMark("stary");
@@ -119,9 +133,9 @@ public class Main {
 			}
 			
 			
-			State fire1 = net.getState();
-			fire1 = fire1.fireTransition(net.getTransitionById(1));
-			fire1 = fire1.fireTransition(net.getTransitionById(3));
+			//State fire1 = net.getState();
+			//fire1 = fire1.fireTransition(net.getTransitionById(1));
+			//fire1 = fire1.fireTransition(net.getTransitionById(3));
 			//fire1.printPlaces();
 			//net.printPlaces();
 			//new Coverability();
