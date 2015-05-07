@@ -38,12 +38,19 @@ public class Main {
 			//state2.printPlaces();
 			//state1 = state2.fireTransition(net.getTransitionById(3));
 			//state1.printPlaces();
+			
 			List<Node> nodes = new LinkedList<Node>();
 			int incrementID = 0;
 			int lastNodeID = 0;
 			
 			Node nodeN0 = new Node(incrementID, 0, 0);
-			nodeN0.setVec(1, 0, 0);
+			int firstVec[] = new int[net.getState().getPlacesVec().length];
+			for (int i = 1; i < firstVec.length; i++) {
+				firstVec[i] = 0;
+			}
+			firstVec[0] = 1;
+			
+			nodeN0.setVec(firstVec);
 			nodeN0.setMark("novy");
 			nodeN0.setState(net.getState());
 			nodes.add(nodeN0);
