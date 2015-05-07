@@ -52,58 +52,56 @@ public class Main {
 			int indexPredchadzajuceho = 0;
 			
 			while(existNew){ // pokial existuju s oznacenim novy
-				indexPredchadzajuceho = nodes.size()-1;
+				//indexPredchadzajuceho = nodes.size()-1;
 				
 				List<State> stavy = net.getAllPossibleStatesFrom(nodes.get(indexPredchadzajuceho).getState());
 				if(stavy.isEmpty()){
 					nodes.get(indexPredchadzajuceho).setMark("mrtvy");
 				}
-				else {
-					if (nodes.get(indexPredchadzajuceho).getMark() == "novy"){
-						for (State state : stavy) {
-							Node newNode = new Node(nodes.size(), nodes.get(indexPredchadzajuceho).getId(), state.getFiredTransition().getId());
-							newNode.setState(state);
-							newNode.setVec(state.getPlacesVec());
-							//prechod nodes aby sme nasli source node
-							/* nepouûÌvaù
-							Node sourceNode = null;
-							for(Node node : nodes){
-								if(node.getId() == nodes.get(nodes.size()-1).getSourceId())
-									sourceNode = node;
-							}
-							*/
-							//porovnanie ci je terajsi rovnaky ako source
-							//TODO: omega
-							int i = 0, j = 0;
-							int newVec[] = new int[newNode.getVec().length];
-							newVec = newNode.getVec().clone();
-							for (i = 0; i < newNode.getVec().length; i++) {	
-								if (newVec[i] > nodes.get(indexPredchadzajuceho).getVec()[i]) {
-									newVec[i] = -1;
-									j++;
-								}
-								else if (newVec[i] == nodes.get(indexPredchadzajuceho).getVec()[i])
-									j++;
-							}
-							if (j == newNode.getVec().length)
-								newNode.setVec(newVec);
-							
-							j = 0;
-							for (i = 0; i < newNode.getVec().length; i++)
-								if (newNode.getVec()[i] == nodes.get(indexPredchadzajuceho).getVec()[i])
-									j++;
-							if(j == nodes.get(indexPredchadzajuceho).getVec().length){
-								nodes.get(nodes.size()-1).setMark("stary");
-							}
-							else
-								nodes.get(nodes.size()-1).setMark("novy");
-							
-							newNode.setState(state);
-							nodes.add(newNode);
+				else if (nodes.get(indexPredchadzajuceho).getMark() == "novy"){
+					for (State state : stavy) {
+						Node newNode = new Node(nodes.size(), nodes.get(indexPredchadzajuceho).getId(), state.getFiredTransition().getId());
+						newNode.setState(state);
+						newNode.setVec(state.getPlacesVec());
+						//prechod nodes aby sme nasli source node
+						/* nepouûÌvaù
+						Node sourceNode = null;
+						for(Node node : nodes){
+							if(node.getId() == nodes.get(nodes.size()-1).getSourceId())
+								sourceNode = node;
 						}
+						*/
+						//porovnanie ci je terajsi rovnaky ako source
+						//TODO: omega
+						int i = 0, j = 0;
+						int newVec[] = new int[newNode.getVec().length];
+						newVec = newNode.getVec().clone();
+						for (i = 0; i < newNode.getVec().length; i++) {	
+							if (newVec[i] > nodes.get(indexPredchadzajuceho).getVec()[i]) {
+								newVec[i] = -1;
+								j++;
+							}
+							else if (newVec[i] == nodes.get(indexPredchadzajuceho).getVec()[i])
+								j++;
+						}
+						if (j == newNode.getVec().length)
+							newNode.setVec(newVec);
+							
+						j = 0;
+						for (i = 0; i < newNode.getVec().length; i++)
+							if (newNode.getVec()[i] == nodes.get(indexPredchadzajuceho).getVec()[i])
+								j++;
+						if(j == nodes.get(indexPredchadzajuceho).getVec().length){
+							//nodes.get(nodes.size()-1).setMark("stary");
+							newNode.setMark("stary");
+						}
+						else{
+							//nodes.get(nodes.size()-1).setMark("novy");
+							newNode.setMark("novy");
+						}
+						newNode.setState(state);
+						nodes.add(newNode);
 					}
-					else
-						indexPredchadzajuceho--;
 				}
 				
 				int newCounter = 0;
@@ -115,6 +113,7 @@ public class Main {
 					existNew = false;
 				
 				nodes.get(indexPredchadzajuceho).setMark("null");
+				indexPredchadzajuceho++;
 			}
 			
 			
