@@ -58,47 +58,54 @@ public class Main {
 				if(stavy.isEmpty()){
 					nodes.get(indexPredchadzajuceho).setMark("mrtvy");
 				}
-				else{
-					
-					for (State state : stavy) {
-						Node newNode = new Node(nodes.size(), nodes.get(indexPredchadzajuceho).getId(), state.getFiredTransition().getId());
-						newNode.setState(state);
-						newNode.setVec(state.getPlacesVec());
-						//prechod nodes aby sme nasli source node
-						/* nepouûÌvaù
-						Node sourceNode = null;
-						for(Node node : nodes){
-							if(node.getId() == nodes.get(nodes.size()-1).getSourceId())
-								sourceNode = node;
-						}
-						*/
-						//porovnanie ci je terajsi rovnaky ako source
-						//TODO: omega
-						int i = 0, j = 0;
-						int newVec[] = new int[newNode.getVec().length];
-						newVec = newNode.getVec().clone();
-						for (i = 0; i < newNode.getVec().length; i++) {	
-							if (newVec[i] > nodes.get(indexPredchadzajuceho).getVec()[i]) {
-								newVec[i] = -1;
-								j++;
+				else {
+					if (nodes.get(indexPredchadzajuceho).getMark() == "novy"){
+						for (State state : stavy) {
+							Node newNode = new Node(nodes.size(), nodes.get(indexPredchadzajuceho).getId(), state.getFiredTransition().getId());
+							newNode.setState(state);
+							newNode.setVec(state.getPlacesVec());
+							//prechod nodes aby sme nasli source node
+							/* nepouûÌvaù
+							Node sourceNode = null;
+							for(Node node : nodes){
+								if(node.getId() == nodes.get(nodes.size()-1).getSourceId())
+									sourceNode = node;
 							}
-							else if (newVec[i] == nodes.get(indexPredchadzajuceho).getVec()[i])
-								j++;
+							*/
+							//porovnanie ci je terajsi rovnaky ako source
+							//TODO: omega
+							int i = 0, j = 0;
+							int newVec[] = new int[newNode.getVec().length];
+							newVec = newNode.getVec().clone();
+							for (i = 0; i < newNode.getVec().length; i++) {	
+								if (newVec[i] > nodes.get(indexPredchadzajuceho).getVec()[i]) {
+									newVec[i] = -1;
+									j++;
+								}
+								else if (newVec[i] == nodes.get(indexPredchadzajuceho).getVec()[i])
+									j++;
+							}
+							if (j == newNode.getVec().length)
+								newNode.setVec(newVec);
+							
+							j = 0;
+							for (i = 0; i < newNode.getVec().length; i++)
+								if (newNode.getVec()[i] == nodes.get(indexPredchadzajuceho).getVec()[i])
+									j++;
+							if(j == nodes.get(indexPredchadzajuceho).getVec().length){
+								nodes.get(nodes.size()-1).setMark("stary");
+							}
+							else
+								nodes.get(nodes.size()-1).setMark("novy");
+							
+							newNode.setState(state);
+							nodes.add(newNode);
 						}
-						if (j == newNode.getVec().length)
-							newNode.setVec(newVec);
-						
-						if(newNode.getVec().equals(nodes.get(indexPredchadzajuceho).getVec())){
-							nodes.get(nodes.size()-1).setMark("stary");
-						}
-						else
-							nodes.get(nodes.size()-1).setMark("novy");
-						
-						newNode.setState(state);
-						nodes.add(newNode);
 					}
-					
+					else
+						indexPredchadzajuceho--;
 				}
+				
 				int newCounter = 0;
 				for(Node node : nodes){
 					if(node.getMark() == "novy")
@@ -125,9 +132,6 @@ public class Main {
 				from = nodes.get(nodes.size()-1).getId();
 			}
 			*/
-			
-			
-			
 			for (Node node : nodes){
 				node.printNode();
 			}
