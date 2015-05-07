@@ -54,12 +54,12 @@ public class Node {
 	public void printNode() {
 		String text = "Uzol N" + id + " = ( ";
 		for (Integer v : vec){
-			if (v == -1)
+			if (v == -3)
 				text += "omega ";
 			else
 				text += v.toString() + " ";
 		}
-		System.out.println(text + ") " + this.mark);
+		System.out.println(text + ") ");
 	}
 	
 	public String getMark(){
