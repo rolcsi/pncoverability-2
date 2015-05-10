@@ -80,13 +80,29 @@ public class Main {
 						//porovnanie ci je terajsi rovnaky ako source
 						//TODO: omega
 						int i = 0, j = 0, k = 0;
+						
+						//prejdem omegy a zapamatam
+						int docasneOmegy[] = new int[newNode.getVec().length];
+						int posuvatko = 0;
+						
+						for (i = 0; i < newNode.getVec().length; i++) {
+							if(nodes.get(indexPredchadzajuceho).getVec()[i] == -3){
+								if(i == 0)
+									docasneOmegy[posuvatko] = 99;
+								else
+									docasneOmegy[posuvatko] = i;
+								
+								posuvatko++;
+							}
+						}
+						
 						int newVec[] = new int[newNode.getVec().length];
 						//newVec = newNode.getVec().clone();
 						for (k = 0; k < nodes.size(); k++){
 							newVec = newNode.getVec().clone();
 							for (i = 0; i < newNode.getVec().length; i++) {	
 								if (newVec[i] > nodes.get(k).getVec()[i]) {
-									newVec[i] = -1;
+									newVec[i] = -3;
 									j++;
 								}
 								else if (newVec[i] == nodes.get(k).getVec()[i])
@@ -95,6 +111,16 @@ public class Main {
 							if (j == newNode.getVec().length){
 								newNode.setVec(newVec);
 								k = nodes.size();
+							}
+							else{
+								//tu nastav spat omegy
+								if(docasneOmegy.length != 0)
+									for (i = 0; i < docasneOmegy.length; i++) {
+										if(docasneOmegy[i] == 99)
+											newNode.getVec()[0] = -3;
+										else if (docasneOmegy[i] != 0)
+											newNode.getVec()[docasneOmegy[i]] = -3;
+									}
 							}
 						}
 						for (k = 0; k < nodes.size(); k++) {
