@@ -75,18 +75,22 @@ public class Main {
 						//TODO: omega
 						int i = 0, j = 0, k = 0;
 						int newVec[] = new int[newNode.getVec().length];
-						newVec = newNode.getVec().clone();
-						for (i = 0; i < newNode.getVec().length; i++) {	
-							if (newVec[i] > nodes.get(indexPredchadzajuceho).getVec()[i]) {
-								newVec[i] = -1;
-								j++;
+						//newVec = newNode.getVec().clone();
+						for (k = 0; k < nodes.size(); k++){
+							newVec = newNode.getVec().clone();
+							for (i = 0; i < newNode.getVec().length; i++) {	
+								if (newVec[i] > nodes.get(k).getVec()[i]) {
+									newVec[i] = -1;
+									j++;
+								}
+								else if (newVec[i] == nodes.get(k).getVec()[i])
+									j++;
 							}
-							else if (newVec[i] == nodes.get(indexPredchadzajuceho).getVec()[i])
-								j++;
+							if (j == newNode.getVec().length){
+								newNode.setVec(newVec);
+								k = nodes.size();
+							}
 						}
-						if (j == newNode.getVec().length)
-							newNode.setVec(newVec);
-						
 						for (k = 0; k < nodes.size(); k++) {
 							j = 0;
 							for (i = 0; i < newNode.getVec().length; i++)
