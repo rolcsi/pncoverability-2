@@ -12,11 +12,6 @@ public class Node {
 		this.id = id;
 		this.sourceId = sourceId;
 		this.sourceTr = sourceTr;
-		this.vec = new int[3];
-		this.vec[0] = 0;
-		this.vec[1] = 0;
-		this.vec[2] = 0;
-		
 	}
 	
 	public Node() {
@@ -39,16 +34,11 @@ public class Node {
 		return vec;
 	}
 	
-	public void setVec(int value1, int value2, int value3) {
-		this.vec[0] = value1;
-		this.vec[1] = value2;
-		this.vec[2] = value3;
-	}
-	
 	public void setVec(int[] pole){
-		this.vec[0] = pole[0];
-		this.vec[1] = pole[1];
-		this.vec[2] = pole[2];
+		this.vec = new int[pole.length];
+		for(int i = 0; i<pole.length ; i++){
+			this.vec[i] = pole[i];
+		}
 	}
 	
 	public void printNode() {

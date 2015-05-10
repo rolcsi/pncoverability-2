@@ -26,9 +26,9 @@ public class Main {
 			Document d= Parser.parse(pflowXML);
 			Pnet net = new Pnet(d);
 			
-			System.out.println("Zvolená petriho sie obsahuje " + net.countPlaces() + " miest(a) a " + net.countTransitions() + " prechod(y/ov)");
+			System.out.println("Zvolenï¿½ petriho sieï¿½ obsahuje " + net.countPlaces() + " miest(a) a " + net.countTransitions() + " prechod(y/ov)");
 			//net.getReachabilityTree();
-			System.out.println("Je ohranièená? " + net.getBoundedness());
+			System.out.println("Je ohraniï¿½enï¿½? " + net.getBoundedness());
 			//net.printPlaces();
 			//net.printTransitions();
 			
@@ -43,7 +43,13 @@ public class Main {
 			int lastNodeID = 0;
 			
 			Node nodeN0 = new Node(incrementID, 0, 0);
-			nodeN0.setVec(1, 0, 0);
+			int firstVec[] = new int[net.getState().getPlacesVec().length];
+						for (int i = 1; i < firstVec.length; i++) {
+							firstVec[i] = 0;
+						}
+						firstVec[0] = 1;
+						
+						nodeN0.setVec(firstVec);
 			nodeN0.setMark("novy");
 			nodeN0.setState(net.getState());
 			nodes.add(nodeN0);
@@ -64,7 +70,7 @@ public class Main {
 						newNode.setState(state);
 						newNode.setVec(state.getPlacesVec());
 						//prechod nodes aby sme nasli source node
-						/* nepouíva
+						/* nepouï¿½ï¿½vaï¿½
 						Node sourceNode = null;
 						for(Node node : nodes){
 							if(node.getId() == nodes.get(nodes.size()-1).getSourceId())
