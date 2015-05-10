@@ -98,7 +98,7 @@ public class State {
 	}
 	
 	public int[] getPlacesVec(){
-		int[] pole = new int[places.getPlaces().size()];
+		int[] pole = new int[3];
 		int i = 0;
 		for (Place place : this.places.getPlaces()) {
 			pole[i] = place.getTokens();
