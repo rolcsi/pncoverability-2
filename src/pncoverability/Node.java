@@ -12,6 +12,8 @@ public class Node {
 		this.id = id;
 		this.sourceId = sourceId;
 		this.sourceTr = sourceTr;
+
+		
 	}
 	
 	public Node() {
@@ -41,7 +43,7 @@ public class Node {
 		}
 	}
 	
-	public void printNode() {
+	public String printNode() {
 		String text = "Uzol N" + id + " = ( ";
 		for (Integer v : vec){
 			if (v == -3)
@@ -49,7 +51,9 @@ public class Node {
 			else
 				text += v.toString() + " ";
 		}
-		System.out.println(text + ") " + this.mark);
+		text += ")\n";
+                
+                return text;
 	}
 	
 	public String getMark(){
