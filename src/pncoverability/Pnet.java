@@ -13,7 +13,7 @@ public class Pnet {
 
 	private State init;
 	private List<Transition> transitions;
-	private boolean isBounded;
+	private boolean isBounded, isSafe;
 	
 	public Pnet(Document d) {
 		init = new State();
@@ -210,5 +210,13 @@ public class Pnet {
 			}
 		}
 		return afterTrans;
+	}
+	
+	public void setSafety(boolean value) {
+		this.isSafe = value;
+	}
+	
+	public boolean getSafety() {
+		return isSafe;
 	}
 }

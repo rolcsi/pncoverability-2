@@ -182,6 +182,9 @@ public class Main {
 			//fire1.printPlaces();
 			//net.printPlaces();
 			//new Coverability();
+			
+			Coverability.testSafety(net, nodes);
+			System.out.println("Bezpecnost: " + net.getSafety());
 		}
 		
 		
