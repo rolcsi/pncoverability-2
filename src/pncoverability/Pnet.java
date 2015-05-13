@@ -219,4 +219,13 @@ public class Pnet {
 	public boolean getSafety() {
 		return isSafe;
 	}
+	
+	public String testTrLiveness(java.util.List<pncoverability.Node> nodes) {
+		String text = "\nMrtve prechody su: ";
+		Coverability.testTrLiveness(transitions, nodes);
+		for (Transition t : transitions)
+			if (!t.getisLive())
+				text += t.getLabel() + " ";
+		return text;
+	}
 }

@@ -36,47 +36,53 @@
             <id>1</id>
             <x>-142</x>
             <y>-88</y>
-            <label/>
+            <label>t3</label>
         </transition>
         <transition>
             <id>2</id>
             <x>-142</x>
             <y>148</y>
-            <label/>
+            <label>t2</label>
         </transition>
         <transition>
             <id>3</id>
             <x>-20</x>
             <y>37</y>
-            <label/>
+            <label>t1</label>
         </transition>
         <transition>
             <id>4</id>
             <x>114</x>
             <y>40</y>
-            <label/>
+            <label>t0</label>
         </transition>
         <arc>
             <type>regular</type>
-            <sourceId>7</sourceId>
-            <destinationId>4</destinationId>
+            <sourceId>1</sourceId>
+            <destinationId>5</destinationId>
             <multiplicity>1</multiplicity>
         </arc>
         <arc>
             <type>regular</type>
             <sourceId>5</sourceId>
-            <destinationId>4</destinationId>
+            <destinationId>1</destinationId>
             <multiplicity>1</multiplicity>
         </arc>
         <arc>
             <type>regular</type>
-            <sourceId>1</sourceId>
-            <destinationId>6</destinationId>
+            <sourceId>5</sourceId>
+            <destinationId>3</destinationId>
             <multiplicity>1</multiplicity>
         </arc>
         <arc>
             <type>regular</type>
-            <sourceId>6</sourceId>
+            <sourceId>3</sourceId>
+            <destinationId>7</destinationId>
+            <multiplicity>1</multiplicity>
+        </arc>
+        <arc>
+            <type>regular</type>
+            <sourceId>7</sourceId>
             <destinationId>2</destinationId>
             <multiplicity>1</multiplicity>
         </arc>
@@ -88,32 +94,26 @@
         </arc>
         <arc>
             <type>regular</type>
-            <sourceId>7</sourceId>
+            <sourceId>6</sourceId>
             <destinationId>2</destinationId>
             <multiplicity>1</multiplicity>
         </arc>
         <arc>
             <type>regular</type>
-            <sourceId>3</sourceId>
-            <destinationId>7</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>5</sourceId>
-            <destinationId>3</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>5</sourceId>
-            <destinationId>1</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
             <sourceId>1</sourceId>
-            <destinationId>5</destinationId>
+            <destinationId>6</destinationId>
+            <multiplicity>1</multiplicity>
+        </arc>
+        <arc>
+            <type>regular</type>
+            <sourceId>5</sourceId>
+            <destinationId>4</destinationId>
+            <multiplicity>1</multiplicity>
+        </arc>
+        <arc>
+            <type>regular</type>
+            <sourceId>7</sourceId>
+            <destinationId>4</destinationId>
             <multiplicity>1</multiplicity>
         </arc>
     </subnet>

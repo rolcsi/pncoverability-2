@@ -166,9 +166,9 @@ public class Main {
             net.getReachabilityTree();
             
             if (net.getBoundedness()) {
-                ohran.setText("<html><font size='5'>Je ohranicena?: </font><font color='green' size='5'>✓</font></html>\n");
+                ohran.setText("<html><font size='5'>Je ohranicena?: </font><font color='green' size='5'>ANO</font></html>\n");
             }else{
-                ohran.setText("<html>Je ohranicena?: <font color='red'>X</font></html>\n");
+                ohran.setText("<html>Je ohranicena?: <font color='red'>NIE</font></html>\n");
             }
         //System.out.println("Zvolena petriho siet obsahuje " + net.countPlaces() + " miest(a) a " + net.countTransitions() + " prechod(y/ov)");
             //net.getReachabilityTree();
@@ -186,7 +186,7 @@ public class Main {
             int incrementID = 0;
             int lastNodeID = 0;
 
-            Node nodeN0 = new Node(incrementID, 0, 0);
+            Node nodeN0 = new Node(incrementID, 0, 0, "null");
             int firstVec[] = new int[net.getState().getPlacesVec().length];
             for (int i = 1; i < firstVec.length; i++) {
                 firstVec[i] = 0;
@@ -209,7 +209,7 @@ public class Main {
                     nodes.get(indexPredchadzajuceho).setMark("mrtvy");
                 } else if (nodes.get(indexPredchadzajuceho).getMark() == "novy") {
                     for (State state : stavy) {
-                        Node newNode = new Node(nodes.size(), nodes.get(indexPredchadzajuceho).getId(), state.getFiredTransition().getId());
+                        Node newNode = new Node(nodes.size(), nodes.get(indexPredchadzajuceho).getId(), state.getFiredTransition().getId(), state.getFiredTransition().getLabel());
                         newNode.setState(state);
                         newNode.setVec(state.getPlacesVec());
 						//prechod nodes aby sme nasli source node
@@ -330,12 +330,13 @@ public class Main {
             //net.printPlaces();
             //new Coverability();
             Coverability.testSafety(net, nodes);
+            textarea.append(net.testTrLiveness(nodes));
             
             //System.out.println("Bezpecnost: " + net.getSafety());
             if (net.getSafety()) {
-                bezp.setText("<html><font size='5'>Je bezpecna?: </font><font color='green' size='5'>✓</font></html>\n");
+                bezp.setText("<html><font size='5'>Je bezpecna?: </font><font color='green' size='5'>ANO</font></html>\n");
             }else{
-                bezp.setText("<html>Je bezpecna?: <font color='red'>X</font></html>\n");
+                bezp.setText("<html>Je bezpecna?: <font color='red'>NIE</font></html>\n");
             }
         }
     }

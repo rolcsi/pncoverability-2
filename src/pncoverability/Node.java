@@ -5,13 +5,14 @@ import java.util.LinkedList;
 public class Node {
 	private int id, sourceId, sourceTr;
 	private int[] vec;
-	private String mark;
+	private String mark, sourceTrLabel;
 	private State state;
 	
-	public Node(int id, int sourceId, int sourceTr) {
+	public Node(int id, int sourceId, int sourceTr, String sourceTrLabel) {
 		this.id = id;
 		this.sourceId = sourceId;
 		this.sourceTr = sourceTr;
+		this.sourceTrLabel = sourceTrLabel;
 	}
 	
 	public Node() {
@@ -50,8 +51,10 @@ public class Node {
 				text += v.toString() + " ";
 		}
 		//System.out.println(text + ") " + this.mark);
-                
-                text += ")" + this.mark+"\n";
+                if (this.mark != "null")
+                	text += ") \"" + this.mark + "\" z uzla N" + this.sourceId + " prechodom \"" + this.sourceTrLabel +"\"\n";
+                else
+                	text += ")" + " z uzla N" + this.sourceId + " prechodom \"" + this.sourceTrLabel +"\"\n";
                 
                 return text;
 	}
@@ -70,5 +73,8 @@ public class Node {
 
 	public void setState(State state) {
 		this.state = state;
+	}
+	public String getSourceTrLabel() {
+		return sourceTrLabel;
 	}
 }
