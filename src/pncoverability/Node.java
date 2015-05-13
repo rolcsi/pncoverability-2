@@ -41,7 +41,7 @@ public class Node {
 		}
 	}
 	
-	public void printNode() {
+	public String printNode() {
 		String text = "Uzol N" + id + " = ( ";
 		for (Integer v : vec){
 			if (v == -3)
@@ -49,7 +49,11 @@ public class Node {
 			else
 				text += v.toString() + " ";
 		}
-		System.out.println(text + ") " + this.mark);
+		//System.out.println(text + ") " + this.mark);
+                
+                text += ")" + this.mark+"\n";
+                
+                return text;
 	}
 	
 	public String getMark(){
