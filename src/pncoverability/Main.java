@@ -36,9 +36,10 @@ public class Main {
 
     private static JTextArea textarea;
 
-    private static JLabel ohran, bezp;
+    private static JLabel ohran;
     private static JPanel left;
     private static JFrame gui;
+    private static JLabel name, analytext, vypisy, bezp;
 
     private static void createAndShowGUI() {
 
@@ -170,6 +171,20 @@ public class Main {
         /*  gui.add(panel2, BorderLayout.WEST);
          gui.add(panel3, BorderLayout.EAST);*/
         gui.add(body, BorderLayout.CENTER);
+        
+        name = new JLabel();
+        left.add(name);
+        
+         analytext = new JLabel();
+           // analytext.setBorder(analy);
+            
+            left.add(analytext);
+            
+            vypisy = new JLabel();
+            left.add(vypisy);
+            
+            bezp = new JLabel();
+            left.add(bezp);
 
     }
 
@@ -192,16 +207,15 @@ public class Main {
         if (fileChooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
             //System.out.println("Selected file: " + file.getAbsolutePath());
-            JLabel name = new JLabel("<html><font size='4'>name: "+file.getAbsolutePath()+" </font></html>");
             
-            left.add(name);
+            name.setText("<html><font size='4'>name: "+file.getAbsolutePath()+" </font></html>");
+            
+            
             
            // EmptyBorder analy = new EmptyBorder(new Insets(80, 80, 80, 80));
-            
-            JLabel analytext = new JLabel("<html><font size='10'>Analysis</font></html>");
-           // analytext.setBorder(analy);
-            
-            left.add(analytext);
+         
+            analytext.setText("<html><font size='10'>Analysis</font></html>");
+           
             
             File pflowXML = new File(file.getAbsolutePath());
             Document d = Parser.parse(pflowXML);
@@ -214,13 +228,12 @@ public class Main {
 
             net.getReachabilityTree();
             
-            JLabel vypisy = new JLabel();
-            left.add(vypisy);
+            
             
             if (net.getBoundedness()) {
                 vypisy.setText("<html><font size='5'>Je ohranicena?: </font><font color='green' size='5'>ANO</font></html>\n");
             }else{
-                vypisy.setText("<html>Je ohranicena?: <font color='red'>NIE</font></html>\n");
+                vypisy.setText("<html><font size='5'>Je ohranicena?: </font><font color='red' size='5'>NIE</font></html>\n");
             }
                                  
         //System.out.println("Zvolena petriho siet obsahuje " + net.countPlaces() + " miest(a) a " + net.countTransitions() + " prechod(y/ov)");
@@ -387,10 +400,12 @@ public class Main {
             
             //System.out.println("Bezpecnost: " + net.getSafety());
             
+            
+            
             if (net.getSafety()) {
-                left.add(new JLabel("<html><font size='5'>Je bezpecna?: </font><font color='green' size='5'>ANO</font></html>\n"));
+                bezp.setText("<html><font size='5'>Je bezpecna?: </font><font color='green' size='5'>ANO</font></html>\n");
             }else{
-                left.add(new JLabel("<html>Je bezpecna?: <font color='red'>NIE</font></html>\n"));
+                bezp.setText("<html><font size='5'>Je bezpecna?: </font><font color='red' size='5'>NIE</font></html>\n");
             }
             
             gui.revalidate();
