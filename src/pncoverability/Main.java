@@ -27,6 +27,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import org.w3c.dom.Document;
@@ -36,6 +37,8 @@ public class Main {
     private static JTextArea textarea;
 
     private static JLabel ohran, bezp;
+    private static JPanel left;
+    private static JFrame gui;
 
     private static void createAndShowGUI() {
 
@@ -43,9 +46,9 @@ public class Main {
         final double SCREEN_FACTOR = 0.8;
         final Dimension MINIMUM_SIZE = new Dimension(200, 200);
 
-        JFrame gui = new JFrame();
+        gui = new JFrame();
 
-        gui.setTitle("XACML Editor");
+        gui.setTitle("Coverability Analyzer");
 
         gui.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -61,7 +64,7 @@ public class Main {
 
         // gui.setLayout(new GridBagLayout());
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(4, 4));
+        panel.setLayout(new GridLayout(1, 1));
 
         JButton choose = new JButton("choose .pflow");
 
@@ -73,35 +76,43 @@ public class Main {
                 fire();
             }
         });
+        
+        EmptyBorder title = new EmptyBorder(new Insets(10, 20, 15, 20));
+       
+        JLabel tit = new JLabel("<html><font size='7'>Coverability Analyzer</font></html>", SwingConstants.CENTER);
+        tit.setBorder(title);
 
-        panel.add(choose);
-        panel.add(new JPanel());
+        //panel.add(choose);
+        panel.add(tit);
+        /*panel.add(new JPanel());
         panel.add(new JPanel());
         panel.add(new JPanel());
         
         panel.add(new JPanel());
         panel.add(new JPanel());
         panel.add(new JPanel());
-        panel.add(new JPanel());
+        panel.add(new JPanel());*/
 
         ohran = new JLabel();
 
-        panel.add(ohran);
+     /*   panel.add(ohran);
         panel.add(new JPanel());
         panel.add(new JPanel());
-        panel.add(new JPanel());
+        panel.add(new JPanel());*/
         
         bezp = new JLabel();
         
-        panel.add(bezp);
+        /*panel.add(bezp);
         panel.add(new JPanel());
         panel.add(new JPanel());
         panel.add(new JPanel());
 
+        gui.add(panel, BorderLayout.PAGE_START);*/
+        
         gui.add(panel, BorderLayout.PAGE_START);
 
         EmptyBorder eb = new EmptyBorder(new Insets(0, 20, 0, 20));
-        panel.setBorder(eb);
+        //panel.setBorder(eb);
 
         /*  JTextPane tPane = new JTextPane();                
          tPane.setBorder(eb);
@@ -120,18 +131,45 @@ public class Main {
 
         JScrollPane sp = new JScrollPane(textarea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         EmptyBorder eb2 = new EmptyBorder(new Insets(10, 20, 20, 20));
+        EmptyBorder eb3 = new EmptyBorder(new Insets(10, 20, 20, 20));
+        EmptyBorder eb4 = new EmptyBorder(new Insets(10, 10, 0, 10));
         sp.setBorder(eb2);
 
-        JPanel panel2 = new JPanel();
-        JPanel panel3 = new JPanel();
+        JPanel body = new JPanel();
+        body.setLayout(new GridLayout(1, 2));
+        left = new JPanel();
+        left.setBorder(eb3);
 
         Font font = textarea.getFont();
         float size = font.getSize() + 4.0f;
         textarea.setFont(font.deriveFont(size));
+        
+        textarea.setBorder(eb4);
+        
+        left.setLayout(new GridLayout(10, 1));
+        
+        JPanel choosepanel = new JPanel();
+        choosepanel.setLayout(new GridLayout(2, 2));
+        choosepanel.add(choose);
+             
+        choosepanel.add(new JPanel());
+        choosepanel.add(new JPanel());
+        choosepanel.add(new JPanel());
+        choosepanel.add(new JPanel());
+        choosepanel.add(new JPanel());
+        choosepanel.add(new JPanel());
+        choosepanel.add(new JPanel());
+
+        
+        left.add(choosepanel);
+        
+        
+        body.add(left);
+        body.add(sp);
 
         /*  gui.add(panel2, BorderLayout.WEST);
          gui.add(panel3, BorderLayout.EAST);*/
-        gui.add(sp, BorderLayout.CENTER);
+        gui.add(body, BorderLayout.CENTER);
 
     }
 
@@ -153,7 +191,18 @@ public class Main {
         Component parent = null;
         if (fileChooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
-            System.out.println("Selected file: " + file.getAbsolutePath());
+            //System.out.println("Selected file: " + file.getAbsolutePath());
+            JLabel name = new JLabel("<html><font size='4'>name: "+file.getAbsolutePath()+" </font></html>");
+            
+            left.add(name);
+            
+           // EmptyBorder analy = new EmptyBorder(new Insets(80, 80, 80, 80));
+            
+            JLabel analytext = new JLabel("<html><font size='10'>Analysis</font></html>");
+           // analytext.setBorder(analy);
+            
+            left.add(analytext);
+            
             File pflowXML = new File(file.getAbsolutePath());
             Document d = Parser.parse(pflowXML);
             Pnet net = new Pnet(d);
@@ -165,11 +214,15 @@ public class Main {
 
             net.getReachabilityTree();
             
+            JLabel vypisy = new JLabel();
+            left.add(vypisy);
+            
             if (net.getBoundedness()) {
-                ohran.setText("<html><font size='5'>Je ohranicena?: </font><font color='green' size='5'>ANO</font></html>\n");
+                vypisy.setText("<html><font size='5'>Je ohranicena?: </font><font color='green' size='5'>ANO</font></html>\n");
             }else{
-                ohran.setText("<html>Je ohranicena?: <font color='red'>NIE</font></html>\n");
+                vypisy.setText("<html>Je ohranicena?: <font color='red'>NIE</font></html>\n");
             }
+                                 
         //System.out.println("Zvolena petriho siet obsahuje " + net.countPlaces() + " miest(a) a " + net.countTransitions() + " prechod(y/ov)");
             //net.getReachabilityTree();
             // System.out.println("Je ohranicena? " + net.getBoundedness());
@@ -333,11 +386,14 @@ public class Main {
             textarea.append(net.testTrLiveness(nodes));
             
             //System.out.println("Bezpecnost: " + net.getSafety());
+            
             if (net.getSafety()) {
-                bezp.setText("<html><font size='5'>Je bezpecna?: </font><font color='green' size='5'>ANO</font></html>\n");
+                left.add(new JLabel("<html><font size='5'>Je bezpecna?: </font><font color='green' size='5'>ANO</font></html>\n"));
             }else{
-                bezp.setText("<html>Je bezpecna?: <font color='red'>NIE</font></html>\n");
+                left.add(new JLabel("<html>Je bezpecna?: <font color='red'>NIE</font></html>\n"));
             }
+            
+            gui.revalidate();
         }
     }
 }
