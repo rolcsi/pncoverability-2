@@ -10,10 +10,10 @@
         <label/>
         <place>
             <id>1</id>
-            <x>-823</x>
-            <y>-491</y>
+            <x>-908</x>
+            <y>-503</y>
             <label>Začiatok</label>
-            <tokens>2</tokens>
+            <tokens>1</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
