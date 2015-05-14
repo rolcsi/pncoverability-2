@@ -251,17 +251,19 @@ public class Main {
             List<Node> nodes = new LinkedList<Node>();
             int incrementID = 0;
             int lastNodeID = 0;
-
+            
             Node nodeN0 = new Node(incrementID, 0, 0, "null");
+            /*
             int firstVec[] = new int[net.getState().getPlacesVec().length];
             for (int i = 1; i < firstVec.length; i++) {
                 firstVec[i] = 0;
             }
             firstVec[0] = 1;
-
-            nodeN0.setVec(firstVec);
+            */
+            //nodeN0.setVec(firstVec);
             nodeN0.setMark("novy");
             nodeN0.setState(net.getState());
+            nodeN0.setVec(net.getState().getPlacesVec());
             nodes.add(nodeN0);
 
             boolean existNew = true;

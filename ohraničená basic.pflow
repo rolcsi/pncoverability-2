@@ -46,14 +46,8 @@
         </transition>
         <arc>
             <type>regular</type>
-            <sourceId>12</sourceId>
-            <destinationId>14</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>10</sourceId>
-            <destinationId>12</destinationId>
+            <sourceId>8</sourceId>
+            <destinationId>9</destinationId>
             <multiplicity>1</multiplicity>
         </arc>
         <arc>
@@ -64,8 +58,14 @@
         </arc>
         <arc>
             <type>regular</type>
-            <sourceId>8</sourceId>
-            <destinationId>9</destinationId>
+            <sourceId>10</sourceId>
+            <destinationId>12</destinationId>
+            <multiplicity>1</multiplicity>
+        </arc>
+        <arc>
+            <type>regular</type>
+            <sourceId>12</sourceId>
+            <destinationId>14</destinationId>
             <multiplicity>1</multiplicity>
         </arc>
     </subnet>
