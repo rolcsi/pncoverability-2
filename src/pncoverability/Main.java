@@ -232,6 +232,7 @@ public class Main {
             
             if (net.getBoundedness()) {
                 vypisy.setText("<html><font size='5'>Je ohranicena?: </font><font color='green' size='5'>ANO</font></html>\n");
+                textarea.append("Tato petriho siet je ohranicena, \nalgoritmus stromu pokrytia je aplikovatelny iba na neohranicene siete, \npreto dany strom pokrytia sa nemusi rovnat spravnemu \ngrafu dosiahnutelnosti pri ohranicenej petriho sieti\n\n");;
             }else{
                 vypisy.setText("<html><font size='5'>Je ohranicena?: </font><font color='red' size='5'>NIE</font></html>\n");
             }
@@ -336,6 +337,12 @@ public class Main {
                                 }
                             }
                         }
+                        /* OMEGA FIX PART*/
+                        for(i = 0; i < newNode.getVec().length; i++) {
+                        	if(nodes.get(newNode.getSourceId()).getVec()[i] == -3)
+                        		newNode.getVec()[i] = -3;
+                        }
+                        /* END */
                         for (k = 0; k < nodes.size(); k++) {
                             j = 0;
                             for (i = 0; i < newNode.getVec().length; i++) {
