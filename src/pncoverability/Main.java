@@ -313,8 +313,10 @@ public class Main {
                         //newVec = newNode.getVec().clone();
                         for (k = 0; k < nodes.size(); k++) {
                             newVec = newNode.getVec().clone();
+                            j = 0;
                             for (i = 0; i < newNode.getVec().length; i++) {
-                                if (newVec[i] > nodes.get(k).getVec()[i]) {
+                                if (newVec[i] > nodes.get(k).getVec()[i] && nodes.get(k).getVec()[i] != -3) {
+                                	//System.out.println("toto: " + newVec[i]+ " je vacsie ako toto"+ nodes.get(k).getVec()[i]);
                                     newVec[i] = -3;
                                     j++;
                                 } else if (newVec[i] == nodes.get(k).getVec()[i]) {
@@ -337,7 +339,8 @@ public class Main {
                                 }
                             }
                         }
-                        /* OMEGA FIX PART*/
+                        /* OMEGA FIX PART */
+                        
                         for(i = 0; i < newNode.getVec().length; i++) {
                         	if(nodes.get(newNode.getSourceId()).getVec()[i] == -3)
                         		newNode.getVec()[i] = -3;
